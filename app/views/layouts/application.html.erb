@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <html>
   <head>
     <title>HomeIot</title>
@@ -10,23 +13,26 @@
 
   <body>
     <header>
-    <nav>
-        <% if user_signed_in? %>
-        <strong><%= link_to current_user.email, pages_show_path %></strong>
-        <%= link_to 'プロフィール変更', edit_user_registration_path %>
-        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-    <% else %>
-        <%= link_to 'ログイン', new_user_session_path %>
-        <% end %>
-    </nav>
-</header>
-
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <% if user_signed_in? %>
+            <strong><%= link_to current_user.email, pages_show_path %></strong>
+            <%= link_to 'プロフィール変更', edit_user_registration_path %>
+            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+          <% else %>
+            <%= link_to 'ログイン', new_user_session_path %>
+            <% end %>
+          </div>
+        </div>
+      </nav>
+    </header>
     <div class="container">
+
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+
       <%= yield %>
     </div>
-    
   </body>
 </html>
