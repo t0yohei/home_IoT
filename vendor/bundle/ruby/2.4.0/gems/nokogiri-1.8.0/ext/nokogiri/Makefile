@@ -12,12 +12,12 @@ NULLCMD = :
 #### Start of system configuration section. ####
 
 srcdir = .
-topdir = /Users/kyohei_toyoda/.rbenv/versions/2.4.1/include/ruby-2.4.0
+topdir = /home/toyohei/.rbenv/versions/2.4.1/include/ruby-2.4.0
 hdrdir = $(topdir)
-arch_hdrdir = /Users/kyohei_toyoda/.rbenv/versions/2.4.1/include/ruby-2.4.0/x86_64-darwin16
+arch_hdrdir = /home/toyohei/.rbenv/versions/2.4.1/include/ruby-2.4.0/armv7l-linux-eabihf
 PATH_SEPARATOR = :
 VPATH = $(srcdir):$(arch_hdrdir)/ruby:$(hdrdir)/ruby
-prefix = $(DESTDIR)/Users/kyohei_toyoda/.rbenv/versions/2.4.1
+prefix = $(DESTDIR)/home/toyohei/.rbenv/versions/2.4.1
 rubysitearchprefix = $(rubylibprefix)/$(sitearch)
 rubyarchprefix = $(rubylibprefix)/$(arch)
 rubylibprefix = $(libdir)/$(RUBY_BASE_NAME)
@@ -31,8 +31,8 @@ rubyhdrdir = $(includedir)/$(RUBY_VERSION_NAME)
 vendorarchdir = $(vendorlibdir)/$(sitearch)
 vendorlibdir = $(vendordir)/$(ruby_version)
 vendordir = $(rubylibprefix)/vendor_ruby
-sitearchdir = $(DESTDIR)./.gem.20170827-2109-1r4ilvu
-sitelibdir = $(DESTDIR)./.gem.20170827-2109-1r4ilvu
+sitearchdir = $(DESTDIR)./.gem.20170910-8806-11meg6w
+sitelibdir = $(DESTDIR)./.gem.20170910-8806-11meg6w
 sitedir = $(rubylibprefix)/site_ruby
 rubyarchdir = $(rubylibdir)/$(arch)
 rubylibdir = $(rubylibprefix)/$(ruby_version)
@@ -50,7 +50,7 @@ dvidir = $(docdir)
 htmldir = $(docdir)
 infodir = $(datarootdir)/info
 docdir = $(datarootdir)/doc/$(PACKAGE)
-oldincludedir = $(SDKROOT)/usr/include
+oldincludedir = $(DESTDIR)/usr/include
 includedir = $(prefix)/include
 localstatedir = $(prefix)/var
 sharedstatedir = $(prefix)/com
@@ -63,12 +63,12 @@ bindir = $(exec_prefix)/bin
 archdir = $(rubyarchdir)
 
 
-CC = clang
-CXX = clang++
+CC = gcc
+CXX = g++
 LIBRUBY = $(LIBRUBY_A)
 LIBRUBY_A = lib$(RUBY_SO_NAME)-static.a
-LIBRUBYARG_SHARED = 
-LIBRUBYARG_STATIC = -l$(RUBY_SO_NAME)-static -framework CoreFoundation
+LIBRUBYARG_SHARED = -Wl,-R$(libdir) -L$(libdir) 
+LIBRUBYARG_STATIC = -Wl,-R$(libdir) -L$(libdir) -l$(RUBY_SO_NAME)-static
 empty =
 OUTFLAG = -o $(empty)
 COUTFLAG = -o $(empty)
@@ -79,19 +79,19 @@ cflags   = $(optflags) $(debugflags) $(warnflags)
 cxxflags = $(optflags) $(debugflags) $(warnflags)
 optflags = -O3 -fno-fast-math
 debugflags = -ggdb3
-warnflags = -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wno-tautological-compare -Wno-parentheses-equality -Wno-constant-logical-operand -Wno-self-assign -Wunused-variable -Wimplicit-int -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wshorten-64-to-32 -Wimplicit-function-declaration -Wdivision-by-zero -Wdeprecated-declarations -Wextra-tokens
-CCDLFLAGS = -fno-common
-CFLAGS   = $(CCDLFLAGS)  -O3 -Wno-error=shorten-64-to-32  -pipe  -DNOKOGIRI_USE_PACKAGED_LIBRARIES $(ARCH_FLAG)
+warnflags = -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wno-tautological-compare -Wno-parentheses-equality -Wno-constant-logical-operand -Wno-self-assign -Wunused-variable -Wimplicit-int -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration -Wdeprecated-declarations -Wno-packed-bitfield-compat -Wsuggest-attribute=noreturn -Wsuggest-attribute=format
+CCDLFLAGS = -fPIC
+CFLAGS   = $(CCDLFLAGS) $(cflags)  -g -DXP_UNIX -O3 -Wall -Wcast-qual -Wwrite-strings -Wconversion -Wmissing-noreturn -Winline -DNOKOGIRI_USE_PACKAGED_LIBRARIES $(ARCH_FLAG)
 INCFLAGS = -I. -I$(arch_hdrdir) -I$(hdrdir)/ruby/backward -I$(hdrdir) -I$(srcdir)
-DEFS     = 
-CPPFLAGS = -DHAVE_ICONV_H -DHAVE_XMLPARSEDOC -DHAVE_XSLTPARSESTYLESHEETDOC -DHAVE_EXSLTFUNCREGISTER -DHAVE_XMLHASFEATURE -DHAVE_XMLFIRSTELEMENTCHILD -DHAVE_XMLRELAXNGSETPARSERSTRUCTUREDERRORS -DHAVE_XMLRELAXNGSETPARSERSTRUCTUREDERRORS -DHAVE_XMLRELAXNGSETVALIDSTRUCTUREDERRORS -DHAVE_XMLSCHEMASETVALIDSTRUCTUREDERRORS -DHAVE_XMLSCHEMASETPARSERSTRUCTUREDERRORS -I/Users/kyohei_toyoda/Documents/workspace/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/x86_64-apple-darwin16.7.0/libxslt/1.1.29/include -I/Users/kyohei_toyoda/Documents/workspace/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/x86_64-apple-darwin16.7.0/libxml2/2.9.4/include/libxml2 -I/Users/kyohei_toyoda/Documents/workspace/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/x86_64-apple-darwin16.7.0/libxml2/2.9.4/include/libxml2 -I/Users/kyohei_toyoda/.rbenv/versions/2.4.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT $(DEFS) $(cppflags) "-DNOKOGIRI_LIBXML2_PATH=\"/Users/kyohei_toyoda/Documents/workspace/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/x86_64-apple-darwin16.7.0/libxml2/2.9.4\"" "-DNOKOGIRI_LIBXML2_PATCHES=\"0001-Fix-comparison-with-root-node-in-xmlXPathCmpNodes.patch 0002-Fix-XPointer-paths-beginning-with-range-to.patch 0003-Disallow-namespace-nodes-in-XPointer-ranges.patch\"" "-DNOKOGIRI_LIBXSLT_PATH=\"/Users/kyohei_toyoda/Documents/workspace/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/x86_64-apple-darwin16.7.0/libxslt/1.1.29\"" "-DNOKOGIRI_LIBXSLT_PATCHES=\"0001-Fix-heap-overread-in-xsltFormatNumberConversion.patch 0002-Check-for-integer-overflow-in-xsltAddTextString.patch\""
+DEFS     = -D_FILE_OFFSET_BITS=64
+CPPFLAGS = -DHAVE_XMLPARSEDOC -DHAVE_XSLTPARSESTYLESHEETDOC -DHAVE_EXSLTFUNCREGISTER -DHAVE_XMLHASFEATURE -DHAVE_XMLFIRSTELEMENTCHILD -DHAVE_XMLRELAXNGSETPARSERSTRUCTUREDERRORS -DHAVE_XMLRELAXNGSETPARSERSTRUCTUREDERRORS -DHAVE_XMLRELAXNGSETVALIDSTRUCTUREDERRORS -DHAVE_XMLSCHEMASETVALIDSTRUCTUREDERRORS -DHAVE_XMLSCHEMASETPARSERSTRUCTUREDERRORS -I/home/toyohei/workspaces/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/armv7l-unknown-linux-gnueabihf/libxslt/1.1.29/include -I/home/toyohei/workspaces/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/armv7l-unknown-linux-gnueabihf/libxml2/2.9.4/include/libxml2 -I/home/toyohei/workspaces/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/armv7l-unknown-linux-gnueabihf/libxml2/2.9.4/include/libxml2 -I/home/toyohei/.rbenv/versions/2.4.1/include  $(DEFS) $(cppflags) "-DNOKOGIRI_LIBXML2_PATH=\"/home/toyohei/workspaces/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/armv7l-unknown-linux-gnueabihf/libxml2/2.9.4\"" "-DNOKOGIRI_LIBXML2_PATCHES=\"0001-Fix-comparison-with-root-node-in-xmlXPathCmpNodes.patch 0002-Fix-XPointer-paths-beginning-with-range-to.patch 0003-Disallow-namespace-nodes-in-XPointer-ranges.patch\"" "-DNOKOGIRI_LIBXSLT_PATH=\"/home/toyohei/workspaces/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/armv7l-unknown-linux-gnueabihf/libxslt/1.1.29\"" "-DNOKOGIRI_LIBXSLT_PATCHES=\"0001-Fix-heap-overread-in-xsltFormatNumberConversion.patch 0002-Check-for-integer-overflow-in-xsltAddTextString.patch\""
 CXXFLAGS = $(CCDLFLAGS) $(cxxflags) $(ARCH_FLAG)
-ldflags  = -L. -L/Users/kyohei_toyoda/.rbenv/versions/2.4.1/lib  -fstack-protector -L/usr/local/lib
-dldflags = -L/Users/kyohei_toyoda/.rbenv/versions/2.4.1/lib  -Wl,-undefined,dynamic_lookup -Wl,-multiply_defined,suppress 
+ldflags  = -L. -L/home/toyohei/.rbenv/versions/2.4.1/lib  -fstack-protector -rdynamic -Wl,-export-dynamic
+dldflags = -L/home/toyohei/.rbenv/versions/2.4.1/lib  -Wl,--compress-debug-sections=zlib 
 ARCH_FLAG = 
 DLDFLAGS = $(ldflags) $(dldflags) $(ARCH_FLAG)
-LDSHARED = $(CC) -dynamic -bundle
-LDSHAREDXX = $(CXX) -dynamic -bundle
+LDSHARED = $(CC) -shared
+LDSHAREDXX = $(CXX) -shared
 AR = ar
 EXEEXT = 
 
@@ -102,7 +102,7 @@ RUBY_VERSION_NAME = $(RUBY_BASE_NAME)-$(ruby_version)
 RUBYW_BASE_NAME = rubyw
 RUBY_BASE_NAME = ruby
 
-arch = x86_64-darwin16
+arch = armv7l-linux-eabihf
 sitearch = $(arch)
 ruby_version = 2.4.0
 ruby = $(bindir)/$(RUBY_BASE_NAME)
@@ -111,8 +111,8 @@ ruby_headers = $(hdrdir)/ruby.h $(hdrdir)/ruby/backward.h $(hdrdir)/ruby/ruby.h 
 
 RM = rm -f
 RM_RF = $(RUBY) -run -e rm -- -rf
-RMDIRS = rmdir -p
-MAKEDIRS = mkdir -p
+RMDIRS = rmdir --ignore-fail-on-non-empty -p
+MAKEDIRS = /bin/mkdir -p
 INSTALL = /usr/bin/install -c
 INSTALL_PROG = $(INSTALL) -m 0755
 INSTALL_DATA = $(INSTALL) -m 644
@@ -122,8 +122,8 @@ TOUCH = exit >
 #### End of system configuration section. ####
 
 preload = 
-libpath = . $(libdir) /Users/kyohei_toyoda/Documents/workspace/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/x86_64-apple-darwin16.7.0/libxml2/2.9.4/lib /Users/kyohei_toyoda/Documents/workspace/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/x86_64-apple-darwin16.7.0/libxslt/1.1.29/lib /usr/local/Cellar/xz/5.2.3/lib
-LIBPATH =  -L. -L$(libdir) -L/Users/kyohei_toyoda/Documents/workspace/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/x86_64-apple-darwin16.7.0/libxml2/2.9.4/lib -L/Users/kyohei_toyoda/Documents/workspace/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/x86_64-apple-darwin16.7.0/libxslt/1.1.29/lib -L/usr/local/Cellar/xz/5.2.3/lib
+libpath = . $(libdir) /home/toyohei/workspaces/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/armv7l-unknown-linux-gnueabihf/libxml2/2.9.4/lib /home/toyohei/workspaces/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/armv7l-unknown-linux-gnueabihf/libxslt/1.1.29/lib /usr/lib/arm-linux-gnueabihf
+LIBPATH =  -L. -L$(libdir) -Wl,-R$(libdir) -L/home/toyohei/workspaces/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/armv7l-unknown-linux-gnueabihf/libxml2/2.9.4/lib -Wl,-R/home/toyohei/workspaces/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/armv7l-unknown-linux-gnueabihf/libxml2/2.9.4/lib -L/home/toyohei/workspaces/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/armv7l-unknown-linux-gnueabihf/libxslt/1.1.29/lib -Wl,-R/home/toyohei/workspaces/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/armv7l-unknown-linux-gnueabihf/libxslt/1.1.29/lib -L/usr/lib/arm-linux-gnueabihf -Wl,-R/usr/lib/arm-linux-gnueabihf
 DEFFILE = 
 
 CLEANFILES = mkmf.log
@@ -134,16 +134,16 @@ extout =
 extout_prefix = 
 target_prefix = /nokogiri
 LOCAL_LIBS = 
-LIBS =  /Users/kyohei_toyoda/Documents/workspace/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/x86_64-apple-darwin16.7.0/libxslt/1.1.29/lib/libexslt.a -lm -liconv -lpthread -llzma -lz /Users/kyohei_toyoda/Documents/workspace/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/x86_64-apple-darwin16.7.0/libxml2/2.9.4/lib/libxml2.a /Users/kyohei_toyoda/Documents/workspace/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/x86_64-apple-darwin16.7.0/libxslt/1.1.29/lib/libxslt.a -lm -liconv -lpthread -llzma -lz /Users/kyohei_toyoda/Documents/workspace/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/x86_64-apple-darwin16.7.0/libxml2/2.9.4/lib/libxml2.a -llzma -lpthread -ldl -lobjc  
+LIBS =  /home/toyohei/workspaces/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/armv7l-unknown-linux-gnueabihf/libxslt/1.1.29/lib/libexslt.a -lm -ldl -lz /home/toyohei/workspaces/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/armv7l-unknown-linux-gnueabihf/libxml2/2.9.4/lib/libxml2.a /home/toyohei/workspaces/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/armv7l-unknown-linux-gnueabihf/libxslt/1.1.29/lib/libxslt.a -ldl -lm -lz /home/toyohei/workspaces/home_IoT/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.0/ports/armv7l-unknown-linux-gnueabihf/libxml2/2.9.4/lib/libxml2.a -lpthread -lgmp -ldl -lcrypt -lm   -lc 
 ORIG_SRCS = html_document.c html_element_description.c html_entity_lookup.c html_sax_parser_context.c html_sax_push_parser.c nokogiri.c xml_attr.c xml_attribute_decl.c xml_cdata.c xml_comment.c xml_document.c xml_document_fragment.c xml_dtd.c xml_element_content.c xml_element_decl.c xml_encoding_handler.c xml_entity_decl.c xml_entity_reference.c xml_io.c xml_libxml2_hacks.c xml_namespace.c xml_node.c xml_node_set.c xml_processing_instruction.c xml_reader.c xml_relax_ng.c xml_sax_parser.c xml_sax_parser_context.c xml_sax_push_parser.c xml_schema.c xml_syntax_error.c xml_text.c xml_xpath_context.c xslt_stylesheet.c
 SRCS = $(ORIG_SRCS) 
 OBJS = html_document.o html_element_description.o html_entity_lookup.o html_sax_parser_context.o html_sax_push_parser.o nokogiri.o xml_attr.o xml_attribute_decl.o xml_cdata.o xml_comment.o xml_document.o xml_document_fragment.o xml_dtd.o xml_element_content.o xml_element_decl.o xml_encoding_handler.o xml_entity_decl.o xml_entity_reference.o xml_io.o xml_libxml2_hacks.o xml_namespace.o xml_node.o xml_node_set.o xml_processing_instruction.o xml_reader.o xml_relax_ng.o xml_sax_parser.o xml_sax_parser_context.o xml_sax_push_parser.o xml_schema.o xml_syntax_error.o xml_text.o xml_xpath_context.o xslt_stylesheet.o
-HDRS = $(srcdir)/html_document.h $(srcdir)/html_element_description.h $(srcdir)/html_entity_lookup.h $(srcdir)/html_sax_parser_context.h $(srcdir)/html_sax_push_parser.h $(srcdir)/nokogiri.h $(srcdir)/xml_attr.h $(srcdir)/xml_attribute_decl.h $(srcdir)/xml_cdata.h $(srcdir)/xml_comment.h $(srcdir)/xml_document.h $(srcdir)/xml_document_fragment.h $(srcdir)/xml_dtd.h $(srcdir)/xml_element_content.h $(srcdir)/xml_element_decl.h $(srcdir)/xml_encoding_handler.h $(srcdir)/xml_entity_decl.h $(srcdir)/xml_entity_reference.h $(srcdir)/xml_io.h $(srcdir)/xml_libxml2_hacks.h $(srcdir)/xml_namespace.h $(srcdir)/xml_node.h $(srcdir)/xml_node_set.h $(srcdir)/xml_processing_instruction.h $(srcdir)/xml_reader.h $(srcdir)/xml_relax_ng.h $(srcdir)/xml_sax_parser.h $(srcdir)/xml_sax_parser_context.h $(srcdir)/xml_sax_push_parser.h $(srcdir)/xml_schema.h $(srcdir)/xml_syntax_error.h $(srcdir)/xml_text.h $(srcdir)/xml_xpath_context.h $(srcdir)/xslt_stylesheet.h
+HDRS = $(srcdir)/xml_processing_instruction.h $(srcdir)/xml_element_decl.h $(srcdir)/xml_entity_decl.h $(srcdir)/xml_xpath_context.h $(srcdir)/xml_io.h $(srcdir)/xml_document_fragment.h $(srcdir)/xml_sax_parser.h $(srcdir)/html_sax_parser_context.h $(srcdir)/xml_document.h $(srcdir)/xml_comment.h $(srcdir)/xml_syntax_error.h $(srcdir)/xml_text.h $(srcdir)/xml_reader.h $(srcdir)/xml_relax_ng.h $(srcdir)/xml_attribute_decl.h $(srcdir)/xslt_stylesheet.h $(srcdir)/xml_namespace.h $(srcdir)/html_element_description.h $(srcdir)/xml_sax_push_parser.h $(srcdir)/xml_attr.h $(srcdir)/html_sax_push_parser.h $(srcdir)/xml_entity_reference.h $(srcdir)/xml_schema.h $(srcdir)/xml_node_set.h $(srcdir)/html_document.h $(srcdir)/xml_dtd.h $(srcdir)/nokogiri.h $(srcdir)/xml_node.h $(srcdir)/xml_encoding_handler.h $(srcdir)/xml_libxml2_hacks.h $(srcdir)/xml_cdata.h $(srcdir)/xml_sax_parser_context.h $(srcdir)/html_entity_lookup.h $(srcdir)/xml_element_content.h
 LOCAL_HDRS = 
 TARGET = nokogiri
 TARGET_NAME = nokogiri
 TARGET_ENTRY = Init_$(TARGET_NAME)
-DLLIB = $(TARGET).bundle
+DLLIB = $(TARGET).so
 EXTSTATIC = 
 STATIC_LIB = 
 
@@ -257,7 +257,6 @@ $(TARGET_SO): $(OBJS) Makefile
 	$(ECHO) linking shared-object nokogiri/$(DLLIB)
 	-$(Q)$(RM) $(@)
 	$(Q) $(LDSHARED) -o $@ $(OBJS) $(LIBPATH) $(DLDFLAGS) $(LOCAL_LIBS) $(LIBS)
-	$(Q) $(POSTLINK)
 
 
 
