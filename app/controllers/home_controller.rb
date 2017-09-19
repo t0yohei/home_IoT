@@ -17,6 +17,7 @@ class HomeController < ApplicationController
     @switch = params[:forecast_switch]
     if @switch == "off"
       system('rake switch:forecast_switch_off')
+      render action: :index
     end
   end
 
