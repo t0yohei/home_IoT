@@ -5,5 +5,10 @@ Rails.application.routes.draw do
   get 'home/show'
   post 'home/forecast_switch_on'
   post 'home/forecast_switch_off'
+  post 'home/cool_on'
+  post 'home/hot_on'
+  post 'home/dry_on'
+  post 'home/air_off'
+
 
 end
