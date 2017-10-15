@@ -12,6 +12,9 @@
   <%= submit_tag("off") %>
 <% end %>
 <br>
+
+<label><%= @message %> </label>
+
 <%= form_tag("/home/cool_on", method: :post) do %>
   <%= hidden_field_tag :air_condition_switch, "cool_on" %>
   <%= submit_tag("冷房") %>
