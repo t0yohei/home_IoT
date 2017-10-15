@@ -1,5 +1,14 @@
 class HomeController < ApplicationController
   def index
+    @error_message = ""
+    @co2 = "co2入るよ"
+    begin
+      system('rake index:co2_get[' + @co2 + ']')
+      p "-----index_contoroller--------"
+    rescue => e
+    p e.message
+    @error_message = e.message
+    end
   end
 
   def show

@@ -3,43 +3,52 @@
 <% if user_signed_in? %>
 <div class="container-fluid bg-info">
   <div class="row">
-<h2>天気予報アプリの起動スイッチ</h2>
-<%= form_tag("/home/forecast_switch_on", method: :post) do %>
-  <%= hidden_field_tag :forecast_switch, "on" %>
-  <%= submit_tag("on") %>
-<% end %>
+    <label>
+      <%= @error_message %>
+    </label>
+  </div>
+    <br>
+    
+  <div class="row">
+    <h2>天気予報アプリの起動スイッチ</h2>
+    <%= form_tag("/home/forecast_switch_on", method: :post) do %>
+    <%= hidden_field_tag :forecast_switch, "on" %>
+    <%= submit_tag("on") %>
+    <% end %>
 
-<%= form_tag("/home/forecast_switch_off", method: :post) do %>
-  <%= hidden_field_tag :forecast_switch, "off" %>
-  <%= submit_tag("off") %>
-<% end %>
-</div>
-<br>
+    <%= form_tag("/home/forecast_switch_off", method: :post) do %>
+    <%= hidden_field_tag :forecast_switch, "off" %>
+    <%= submit_tag("off") %>
+    <% end %>
+  </div>
+  <br>
 
-<div class="row">
+  <div class="row">
 
-<h2>エアコンのリモコンスイッチ</h2>
-<%= form_tag("/home/cool_on", method: :post) do %>
-  <%= hidden_field_tag :air_condition_switch, "cool_on" %>
-  <%= submit_tag("冷房") %>
-<% end %>
+    <h2>エアコンのリモコンスイッチ</h2>
+    <%= form_tag("/home/cool_on", method: :post) do %>
+    <%= hidden_field_tag :air_condition_switch, "cool_on" %>
+    <%= submit_tag("冷房") %>
+    <% end %>
 
-<%= form_tag("/home/hot_on", method: :post) do %>
-  <%= hidden_field_tag :air_condition_switch, "hot_on" %>
-  <%= submit_tag("暖房") %>
-<% end %>
+    <%= form_tag("/home/hot_on", method: :post) do %>
+    <%= hidden_field_tag :air_condition_switch, "hot_on" %>
+    <%= submit_tag("暖房") %>
+    <% end %>
 
-<%= form_tag("/home/dry_on", method: :post) do %>
-  <%= hidden_field_tag :air_condition_switch, "dry_on" %>
-  <%= submit_tag("除湿") %>
-<% end %>
+    <%= form_tag("/home/dry_on", method: :post) do %>
+    <%= hidden_field_tag :air_condition_switch, "dry_on" %>
+    <%= submit_tag("除湿") %>
+    <% end %>
 
-<%= form_tag("/home/air_off", method: :post) do %>
-  <%= hidden_field_tag :air_condition_switch, "air_off" %>
-  <%= submit_tag("エアコン停止") %>
-<% end %>
-<label><%= @message %> </label>
-</div>
+    <%= form_tag("/home/air_off", method: :post) do %>
+    <%= hidden_field_tag :air_condition_switch, "air_off" %>
+    <%= submit_tag("エアコン停止") %>
+    <% end %>
+    <label>
+      <%= @message %>
+    </label>
+  </div>
 </div>
 
 <% else %>
