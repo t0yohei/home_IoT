@@ -6,9 +6,17 @@
     <label>
       <%= @error_message %>
     </label>
+    <h2>CO2濃度取得</h2>
+    <%= form_tag("/home/index", method: :post) do %>
+    <%= submit_tag("取得") %>
+    <% end %>
+      <br>
+    <label>
+      現在のCO2濃度は<%= @co2 %>です。
+    </label>
   </div>
     <br>
-    
+
   <div class="row">
     <h2>天気予報アプリの起動スイッチ</h2>
     <%= form_tag("/home/forecast_switch_on", method: :post) do %>
@@ -46,7 +54,7 @@
     <%= submit_tag("エアコン停止") %>
     <% end %>
     <label>
-      <%= @message %>
+      <%= $message %>
     </label>
   </div>
 </div>

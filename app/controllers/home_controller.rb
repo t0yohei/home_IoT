@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  $message = ""
   def index
     @error_message = ""
     @co2 = "co2入るよ"
@@ -31,7 +32,7 @@ class HomeController < ApplicationController
     p "-----cool_on_contoroller--------"
     p @switch
       system('rake switch:cool_on')
-      @message = "cool_on_now"
+      $message = $message + "cool_on_now"
       render action: :index
   end
 
@@ -40,7 +41,7 @@ class HomeController < ApplicationController
     p "-----hot_on_contoroller--------"
     p @switch
       system('rake switch:hot_on')
-      @message = "hot_on_now"
+      $message = $message + "hot_on_now"
       render action: :index
   end
 
@@ -49,7 +50,7 @@ class HomeController < ApplicationController
     p "-----dry_on_contoroller--------"
     p @switch
       system('rake switch:dry_on')
-      @message = "dry_on_now"
+      $message = $message + "dry_on_now"
       render action: :index
   end
 
@@ -58,7 +59,7 @@ class HomeController < ApplicationController
     p "-----air_off_contoroller--------"
     p @switch
       system('rake switch:air_off')
-      @message = "air_off_now"
+      $message = $message + "air_off_now"
       render action: :index
   end
 
