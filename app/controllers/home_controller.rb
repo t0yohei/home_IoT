@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  $message = ""
+  $message_log = []
   def index
     @error_message = ""
     @co2 = "co2入るよ"
@@ -15,51 +15,34 @@ class HomeController < ApplicationController
   def show
   end
 
-  def forecast_switch_on
+  def forecast_switch
     @switch = params[:forecast_switch]
+    if @switch == "on"
       system('rake switch:forecast_switch_on')
-      render action: :index
-  end
-
-  def forecast_switch_off
-    @switch = params[:forecast_switch]
+    elsif @switch == "off"
       system('rake switch:forecast_switch_off')
-      render action: :index
+    end
+    message =  "天気予報LEDを" + @switch + "しました。"
+    $message_log.unshift(message)
+    render action: :index
   end
 
-  def cool_on
+  def air_controll
     @switch = params[:air_condition_switch]
-    p "-----cool_on_contoroller--------"
+    p "-----air_controll_contoroller--------"
     p @switch
+    if @switch == "cool_on"
       system('rake switch:cool_on')
-      $message = $message + "cool_on_now"
-      render action: :index
-  end
-
-  def hot_on
-    @switch = params[:air_condition_switch]
-    p "-----hot_on_contoroller--------"
-    p @switch
+    elsif @switch == "hot_on"
       system('rake switch:hot_on')
-      $message = $message + "hot_on_now"
-      render action: :index
-  end
-
-  def dry_on
-    @switch = params[:air_condition_switch]
-    p "-----dry_on_contoroller--------"
-    p @switch
+    elsif @switch == "dry_on"
       system('rake switch:dry_on')
-      $message = $message + "dry_on_now"
-      render action: :index
-  end
-
-  def air_off
-    @switch = params[:air_condition_switch]
-    p "-----air_off_contoroller--------"
-    p @switch
+    elsif @switch == "air_off"
       system('rake switch:air_off')
-      $message = $message + "air_off_now"
+    end
+
+      message = "エアコンを" + @switch + "しました"
+      $message_log.unshift(message)
       render action: :index
   end
 
