@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
+  require 'date'
   $message_log = []
+
   def index
     @error_message = ""
     @co2 = "co2入るよ"
@@ -16,34 +18,48 @@ class HomeController < ApplicationController
   end
 
   def forecast_switch
-    @switch = params[:forecast_switch]
-    if @switch == "on"
+    operation = params[:forecast_switch]
+    switch_name = "天気予報スイッチ"
+
+    if operation == "on"
       system('rake switch:forecast_switch_on')
-    elsif @switch == "off"
+    elsif operation == "off"
       system('rake switch:forecast_switch_off')
     end
-    message =  "天気予報LEDを" + @switch + "しました。"
-    $message_log.unshift(message)
+
+    create_message(switch_name, operation)
     render action: :index
   end
 
   def air_controll
-    @switch = params[:air_condition_switch]
+    operation = params[:air_condition_switch]
+    switch_name = "エアコンスイッチ"
+
     p "-----air_controll_contoroller--------"
-    p @switch
-    if @switch == "cool_on"
+    p operation
+    if operation == "cool_on"
       system('rake switch:cool_on')
-    elsif @switch == "hot_on"
+    elsif operation == "hot_on"
       system('rake switch:hot_on')
-    elsif @switch == "dry_on"
+    elsif operation == "dry_on"
       system('rake switch:dry_on')
-    elsif @switch == "air_off"
+    elsif operation == "air_off"
       system('rake switch:air_off')
     end
 
-      message = "エアコンを" + @switch + "しました"
-      $message_log.unshift(message)
-      render action: :index
+    create_message(switch_name, operation)
+    render action: :index
+  end
+
+  def create_message(switch_name, operation)
+    time = Date.today.to_time
+    user = current_user.email
+    p user
+    p user.class
+    p time
+    p time.class
+    message = time.to_s + "に" + user + "が" + switch_name + "を" + operation + "しました。"
+    $message_log.unshift(message)
   end
 
   def forecast_params

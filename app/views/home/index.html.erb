@@ -1,65 +1,103 @@
-<h1>トップページ</h1>
+<div class="container-fluid text-center">
+  <h2>お家のIoT</h2>
+</div>
 
 <% if user_signed_in? %>
-<div class="container-fluid bg-info">
-  <div class="row">
-    <label>
-      <%= @error_message %>
-    </label>
-    <h2>CO2濃度取得</h2>
-    <%= form_tag("/home/index", method: :post) do %>
-    <%= submit_tag("取得") %>
-    <% end %>
+<div class="container-fluid">
+  <label>
+    <%= @error_message %>
+  </label>
+
+  <div class="container-fluid col-sm-6">
+    <div class="container-fluid">
+      <div class="row text-center bg-success">
+        <h3>CO2濃度取得</h3>
+        <%= form_tag("/home/index", method: :post) do %>
+        <input class="btn btn-success" type="submit" value="取得">
+        <% end %>
+        <br>
+        <label>
+          現在のCO2濃度は<%= @co2 %>です。
+        </label>
+        <br>
+      </div>
       <br>
-    <label>
-      現在のCO2濃度は<%= @co2 %>です。
-    </label>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row text-center bg-info">
+        <h3>天気予報アプリの起動スイッチ</h3>
+        <div class="col-sm-3 col-sm-offset-2">
+          <%= form_tag("/home/forecast_switch", method: :post) do %>
+          <%= hidden_field_tag :forecast_switch, "on" %>
+          <input class="btn btn-info" type="submit" value="天気予報on">
+          <% end %>
+        </div>
+
+        <div class="col-sm-3 col-sm-offset-2">
+          <%= form_tag("/home/forecast_switch", method: :post) do %>
+          <%= hidden_field_tag :forecast_switch, "off" %>
+          <input class="btn btn-info" type="submit" value="天気予報off">
+          <% end %>
+          <br>
+        </div>
+        <br>
+      </div>
+      <br>
+    </div>
+
+    <div class="ontainer-fluid bg-warning text-center">
+      <div class="row">
+
+        <h3>エアコンのリモコンスイッチ</h3>
+        <div class="col-sm-1 col-sm-offset-3">
+          <%= form_tag("/home/air_controll", method: :post) do %>
+          <%= hidden_field_tag :air_condition_switch, "cool_on" %>
+          <input class="btn btn-warning" type="submit" value="冷房">
+          <% end %>
+        </div>
+
+        <div class="col-sm-1 col-sm-offset-1">
+          <%= form_tag("/home/air_controll", method: :post) do %>
+          <%= hidden_field_tag :air_condition_switch, "hot_on" %>
+          <input class="btn btn-warning" type="submit" value="暖房">
+          <% end %>
+        </div>
+
+        <div class="col-sm-1 col-sm-offset-1">
+          <%= form_tag("/home/air_controll", method: :post) do %>
+          <%= hidden_field_tag :air_condition_switch, "dry_on" %>
+          <input class="btn btn-warning" type="submit" value="除湿">
+          <% end %>
+        </div>
+        <br>
+      </div>
+      <br>
+
+      <div class="row">
+        <%= form_tag("/home/air_controll", method: :post) do %>
+        <%= hidden_field_tag :air_condition_switch, "air_off" %>
+        <input class="btn btn-danger" type="submit" value="エアコン停止">
+        <% end %>
+      </div>
+      <br>
+    </div>
   </div>
-    <br>
 
-  <div class="row">
-    <h2>天気予報アプリの起動スイッチ</h2>
-    <%= form_tag("/home/forecast_switch", method: :post) do %>
-    <%= hidden_field_tag :forecast_switch, "on" %>
-    <%= submit_tag("天気予報on") %>
-    <% end %>
-
-    <%= form_tag("/home/forecast_switch", method: :post) do %>
-    <%= hidden_field_tag :forecast_switch, "off" %>
-    <%= submit_tag("天気予報off") %>
-    <% end %>
-  </div>
-  <br>
-
-  <div class="row">
-
-    <h2>エアコンのリモコンスイッチ</h2>
-    <%= form_tag("/home/air_controll", method: :post) do %>
-    <%= hidden_field_tag :air_condition_switch, "cool_on" %>
-    <%= submit_tag("冷房") %>
-    <% end %>
-
-    <%= form_tag("/home/air_controll", method: :post) do %>
-    <%= hidden_field_tag :air_condition_switch, "hot_on" %>
-    <%= submit_tag("暖房") %>
-    <% end %>
-
-    <%= form_tag("/home/air_controll", method: :post) do %>
-    <%= hidden_field_tag :air_condition_switch, "dry_on" %>
-    <%= submit_tag("除湿") %>
-    <% end %>
-
-    <%= form_tag("/home/air_controll", method: :post) do %>
-    <%= hidden_field_tag :air_condition_switch, "air_off" %>
-    <%= submit_tag("エアコン停止") %>
-    <% end %>
-
-  </div>
-  <div class="row">
-    <% $message_log.each do |message| %>
-    <label><%= message %></label>
-    <br>
-    <% end %>
+  <div class="container-fluid col-sm-6">
+    <div class="container-fluid">
+      <div class="row">
+        <br>
+        <table class="table table-striped">
+          <tbody>
+            <% $message_log.each do |message| %>
+            <tr><%= message %></tr>
+            <br>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
 
