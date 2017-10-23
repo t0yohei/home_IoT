@@ -1,8 +1,10 @@
 class HomeController < ApplicationController
-  require 'date'
+#  require 'date'
   $message_log = []
 
   def index
+    operation = "on"
+    switch_name = "co2取得スイッチ"
     @error_message = ""
     @co2 = "co2入るよ"
     begin
@@ -12,6 +14,7 @@ class HomeController < ApplicationController
     p e.message
     @error_message = e.message
     end
+    create_message(switch_name, operation)
   end
 
   def show
@@ -52,13 +55,11 @@ class HomeController < ApplicationController
   end
 
   def create_message(switch_name, operation)
-    time = Date.today.to_time
+    time = Time.current
+    time = time.strftime('%Y-%m-%d %H:%M')
     user = current_user.email
-    p user
-    p user.class
-    p time
-    p time.class
-    message = time.to_s + "に" + user + "が" + switch_name + "を" + operation + "しました。"
+    /@./ =~ user
+    message = time.to_s + " に " + $` + " が  " + switch_name + " を " + operation + " しました。"
     $message_log.unshift(message)
   end
 

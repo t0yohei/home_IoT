@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   #CO2濃度取得
   root 'home#index'
-  post 'home/index_contoroller'
+  post 'home/index'
   get 'home/show'
 
   #スイッチ系

@@ -1,5 +1,6 @@
 <div class="container-fluid text-center">
   <h2>お家のIoT</h2>
+  <br>
 </div>
 
 <% if user_signed_in? %>
@@ -16,17 +17,13 @@
         <input class="btn btn-success" type="submit" value="取得">
         <% end %>
         <br>
-        <label>
-          現在のCO2濃度は<%= @co2 %>です。
-        </label>
-        <br>
       </div>
       <br>
     </div>
 
     <div class="container-fluid">
       <div class="row text-center bg-info">
-        <h3>天気予報アプリの起動スイッチ</h3>
+        <h3>天気予報アプリの起動</h3>
         <div class="col-sm-3 col-sm-offset-2">
           <%= form_tag("/home/forecast_switch", method: :post) do %>
           <%= hidden_field_tag :forecast_switch, "on" %>
@@ -49,7 +46,7 @@
     <div class="ontainer-fluid bg-warning text-center">
       <div class="row">
 
-        <h3>エアコンのリモコンスイッチ</h3>
+        <h3>エアコンのリモコン</h3>
         <div class="col-sm-1 col-sm-offset-3">
           <%= form_tag("/home/air_controll", method: :post) do %>
           <%= hidden_field_tag :air_condition_switch, "cool_on" %>
@@ -85,9 +82,31 @@
   </div>
 
   <div class="container-fluid col-sm-6">
-    <div class="container-fluid">
+    <div class="container-fluid bg-danger">
+        <div class="h3 text-center">取得データ</div>
+        <div class="container-fluid">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>項目名称</th>
+                <th>数値</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>CO2濃度</td>
+                <td><%= @co2 %></td>
+              </tr>
+              <br>
+            </tbody>
+          </table>
+        </div>
+    </div>
+    <br>
+    <div class="container-fluid bg-danger">
       <div class="row">
-        <br>
+        <div class="h3 text-center">操作履歴</div>
+        <div class="container-fluid">
         <table class="table table-striped">
           <tbody>
             <% $message_log.each do |message| %>
@@ -97,6 +116,7 @@
           </tbody>
         </table>
       </div>
+    </div>
     </div>
   </div>
 </div>
