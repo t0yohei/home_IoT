@@ -1,5 +1,4 @@
 class HomeController < ApplicationController
-#  require 'date'
   $message_log = []
 
   def index
@@ -10,7 +9,6 @@ class HomeController < ApplicationController
       @co2 = "co2入るよ"
       begin
         system('rake index:co2_get[' + @co2 + ']')
-        p "-----index_contoroller--------"
       rescue => e
         p e.message
         @error_message = e.message
@@ -40,8 +38,6 @@ class HomeController < ApplicationController
     operation = params[:air_condition_switch]
     switch_name = "エアコンスイッチ"
 
-    p "-----air_controll_contoroller--------"
-    p operation
     if operation == "cool_on"
       system('rake switch:cool_on')
     elsif operation == "hot_on"
