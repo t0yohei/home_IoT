@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-#  require 'date'
+    require 'open3'
   $message_log = []
 
   def index
@@ -7,10 +7,12 @@ class HomeController < ApplicationController
       operation = "on"
       switch_name = "co2取得スイッチ"
       @error_message = ""
-      @co2 = "co2入るよ"
+      co2 = "co2入るよ"
       begin
-        system('rake index:co2_get[' + @co2 + ']')
+        @co2, @e, @s = Open3.capture3('rake index:co2_get')
+        #system('rake index:co2_get')
         p "-----index_contoroller--------"
+        p @co2
       rescue => e
         p e.message
         @error_message = e.message

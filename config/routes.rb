@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   #CO2濃度取得
   root 'home#index'
+  get 'home/index'
   post 'home/index'
   get 'home/show'
 
