@@ -9,10 +9,7 @@ class HomeController < ApplicationController
       @error_message = ""
       co2 = "co2入るよ"
       begin
-        @co2, @e, @s = Open3.capture3('rake index:co2_get')
-        #system('rake index:co2_get')
-        p "-----index_contoroller--------"
-        p @co2
+        @co2= Open3.capture3('rake index_switch:co2_get')
       rescue => e
         p e.message
         @error_message = e.message
@@ -27,33 +24,17 @@ class HomeController < ApplicationController
   def forecast_switch
     operation = params[:forecast_switch]
     switch_name = "天気予報スイッチ"
-
-    if operation == "on"
-      system('rake switch:forecast_switch_on')
-    elsif operation == "off"
-      system('rake switch:forecast_switch_off')
-    end
-
+    rake_command = 'rake forecast_switch:' + operation
+    system(rake_command)
     create_message(switch_name, operation)
     render action: :index
   end
 
   def air_controll
-    operation = params[:air_condition_switch]
+    operation = params[:air_controll]
     switch_name = "エアコンスイッチ"
-
-    p "-----air_controll_contoroller--------"
-    p operation
-    if operation == "cool_on"
-      system('rake switch:cool_on')
-    elsif operation == "hot_on"
-      system('rake switch:hot_on')
-    elsif operation == "dry_on"
-      system('rake switch:dry_on')
-    elsif operation == "air_off"
-      system('rake switch:air_off')
-    end
-
+    rake_command = 'rake air_controll:' + operation
+    system(rake_command)
     create_message(switch_name, operation)
     render action: :index
   end
@@ -63,7 +44,7 @@ class HomeController < ApplicationController
     time = time.strftime('%Y-%m-%d %H:%M')
     user = current_user.email
     /@./ =~ user
-    message = "・" + time.to_s + " に " + $` + " が  " + switch_name + " を " + operation + " しました。"
+    message = "・" + time.to_s + " に " + $` + " が  " + switch_name + " を " + operation + " にしました。"
     $message_log.unshift(message)
   end
 
