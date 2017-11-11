@@ -4,6 +4,9 @@
 import time
 import RPi.GPIO as GPIO
 
+# GND - 6番ピン(GND)
+# PWD - 2番ピン(5V)
+# GPIO - 8番ピン(GPIO14)
 PIN_PWM = 14
 
 def getPwm():
@@ -36,7 +39,7 @@ def getPwm():
         print("Cycle : " + str(span_high + span_low))
 
         co2     = 5000 * ( span_high - 2 ) / ( span_high + span_low - 4 )
-
-        print("co2濃度は" + co2 + "ppt")
         GPIO.cleanup()
         return co2
+
+print getPwm()
