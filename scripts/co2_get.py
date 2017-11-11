@@ -23,7 +23,7 @@ def getPwm():
                 last_high = time.time()
 
         span_high = (last_high - last_low) * 1000
-        print("span_high : " + str(span_high))
+#        print("span_high : " + str(span_high))
 
 
         while GPIO.input(PIN_PWM) == 0:
@@ -34,9 +34,9 @@ def getPwm():
                 last_low = time.time()
 
         span_low = (last_low - last_high) * 1000
-        print("span_low : " + str(span_low))
+#        print("span_low : " + str(span_low))
 
-        print("Cycle : " + str(span_high + span_low))
+#        print("Cycle : " + str(span_high + span_low))
 
         co2     = 5000 * ( span_high - 2 ) / ( span_high + span_low - 4 )
         GPIO.cleanup()
