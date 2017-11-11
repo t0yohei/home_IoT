@@ -6,7 +6,7 @@ import RPi.GPIO as GPIO
 
 PIN_PWM = 14
 
-def getPwm(co2):
+def getPwm():
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(PIN_PWM,GPIO.IN)

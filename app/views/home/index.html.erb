@@ -3,7 +3,7 @@
   <br>
 </div>
 
-<% if Error: source does not appear to be markup. %>
+<% if user_signed_in? %>
 <div class="container-fluid">
   <label>
     <%= @error_message %>
@@ -49,21 +49,21 @@
         <h3>エアコンのリモコン</h3>
         <div class="col-sm-1 col-sm-offset-3">
           <%= form_tag("/home/air_controll", method: :post) do %>
-          <%= hidden_field_tag :air_condition_switch, "cool_on" %>
+          <%= hidden_field_tag :air_controll, "cool_on" %>
           <input class="btn btn-warning" type="submit" value="冷房">
           <% end %>
         </div>
 
         <div class="col-sm-1 col-sm-offset-1">
           <%= form_tag("/home/air_controll", method: :post) do %>
-          <%= hidden_field_tag :air_condition_switch, "hot_on" %>
+          <%= hidden_field_tag :air_controll, "hot_on" %>
           <input class="btn btn-warning" type="submit" value="暖房">
           <% end %>
         </div>
 
         <div class="col-sm-1 col-sm-offset-1">
           <%= form_tag("/home/air_controll", method: :post) do %>
-          <%= hidden_field_tag :air_condition_switch, "dry_on" %>
+          <%= hidden_field_tag :air_controll, "dry_on" %>
           <input class="btn btn-warning" type="submit" value="除湿">
           <% end %>
         </div>
@@ -73,7 +73,7 @@
 
       <div class="row">
         <%= form_tag("/home/air_controll", method: :post) do %>
-        <%= hidden_field_tag :air_condition_switch, "air_off" %>
+        <%= hidden_field_tag :air_controll, "air_off" %>
         <input class="btn btn-danger" type="submit" value="エアコン停止">
         <% end %>
       </div>
