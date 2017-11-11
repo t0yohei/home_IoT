@@ -7,11 +7,14 @@ class HomeController < ApplicationController
       operation = "on"
       switch_name = "co2取得スイッチ"
       @error_message = ""
+
       begin
-        @co2, a, b = Open3.capture3('rake index_switch:co2_get')
+        @co2, error, status = Open3.capture3('rake index_switch:co2_get')
+        @co2 = @co2.match(%r{"(.+?)\\n"})[1]
       rescue => e
-        @error_message = e.message
+        @co2= "co2濃度を取得できませんでした"
       end
+
       create_message(switch_name, operation)
     end
   end
