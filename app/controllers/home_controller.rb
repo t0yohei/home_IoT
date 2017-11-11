@@ -8,7 +8,7 @@ class HomeController < ApplicationController
       switch_name = "co2取得スイッチ"
       @error_message = ""
       begin
-        @co2 = Open3.capture3('rake index_switch:co2_get')
+        @co2, a, b = Open3.capture3('rake index_switch:co2_get')
       rescue => e
         @error_message = e.message
       end
