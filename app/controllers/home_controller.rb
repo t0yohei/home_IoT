@@ -1,20 +1,16 @@
 class HomeController < ApplicationController
-    require 'open3'
+    require "open3"
+    require "Co2.rb"
+
   $message_log = []
 
   def index
     if user_signed_in?
       operation = "on"
-      switch_name = "co2取得スイッチ"
+      switch_name = "CO2取得スイッチ"
       @error_message = ""
 
-      begin
-        @co2, error, status = Open3.capture3('rake index_switch:co2_get')
-        @co2 = @co2.match(%r{"(.+?)\\n"})[1]
-      rescue => e
-        @co2= "co2濃度を取得できませんでした"
-      end
-
+      Co2.get_co2
       create_message(switch_name, operation)
     end
   end
