@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
     require "open3"
-    require "Co2.rb"
+    require "co2.rb"
 
   $message_log = []
 
