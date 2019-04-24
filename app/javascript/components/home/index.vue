@@ -10,6 +10,11 @@
         <div class="container-fluid">
           <div class="row text-center bg-success">
             <h3>CO2濃度取得</h3>
+            <button
+              v-on:click="getCo2Density"
+              class="btn btn-success"
+            >取得
+            </button>
             <br>
           </div>
           <br>
@@ -18,8 +23,19 @@
         <div class="container-fluid">
           <div class="row text-center bg-info">
             <h3>天気予報アプリの起動</h3>
-            <div class="col-sm-3 col-sm-offset-2"></div>
             <div class="col-sm-3 col-sm-offset-2">
+              <button
+                v-on:click="turnOnWeatherForecast"
+                class="btn btn-info"
+              >天気予報on
+              </button>
+            </div>
+            <div class="col-sm-3 col-sm-offset-2">
+              <button
+                v-on:click="turnOffWeatherForecast"
+                class="btn btn-info"
+              >天気予報off
+              </button>
               <br>
             </div>
             <br>
@@ -30,16 +46,36 @@
         <div class="ontainer-fluid bg-warning text-center">
           <div class="row">
             <h3>エアコンのリモコン</h3>
-            <div class="col-sm-1 col-sm-offset-3"></div>
-
-            <div class="col-sm-1 col-sm-offset-1"></div>
-
-            <div class="col-sm-1 col-sm-offset-1"></div>
+            <div class="col-sm-1 col-sm-offset-3">
+              <button
+                v-on:click="turnOnCool"
+                class="btn btn-warning"
+              >冷房
+              </button>
+            </div>
+            <div class="col-sm-1 col-sm-offset-1">
+              <button
+                v-on:click="turnOnWarm"
+                class="btn btn-warning"
+              >暖房
+              </button>
+            </div>
+            <div class="col-sm-1 col-sm-offset-1">
+              <button
+                v-on:click="turnOnDry"
+                class="btn btn-warning"
+              >除湿
+              </button>
+            </div>
             <br>
           </div>
           <br>
-
           <div class="row"></div>
+            <button
+              v-on:click="turnOffAirControll"
+              class="btn btn-danger"
+            >エアコン停止
+            </button>
           <br>
         </div>
       </div>
@@ -87,5 +123,37 @@
 </style>
 
 <script>
-export default {};
+export default {
+  data: function () {
+    return {
+      co2: {
+        time: '',
+        density: ''
+      },
+    }
+  },
+  methods: {
+    getCo2Density(){
+      console.log('co2');
+    },
+    turnOnWeatherForecast(){
+      console.log('天気予報on');
+    },
+    turnOffWeatherForecast(){
+      console.log('天気予報off');
+    },
+    turnOnCool() {
+      console.log('冷房on');
+    },
+    turnOnWarm() {
+      console.log('暖房on');
+    },
+    turnOnDry() {
+      console.log('除湿on');
+    },
+    turnOffAirControll() {
+      console.log('エアコン停止');
+    },
+  }
+};
 </script>
