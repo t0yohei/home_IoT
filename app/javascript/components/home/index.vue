@@ -65,38 +65,33 @@
       </div>
 
       <div class="container-fluid col-sm-6">
-        <div class="container-fluid bg-danger">
-          <div class="h3 text-center">取得データ</div>
-          <div class="container-fluid">
-            <table class="table table-bordered">
-              <thead>
-                <tr class="active">
-                  <th>項目名称</th>
-                  <th>数値</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="active">
-                  <td>CO2濃度</td>
-                </tr>
-                <br>
-              </tbody>
-            </table>
-          </div>
+        <div class="row bg-danger right-row">
+          <h3 class="text-center">取得データ</h3>
+          <table align="center" class="table table-bordered acquired-data">
+            <thead>
+              <tr class="active">
+                <th>項目名称</th>
+                <th>数値</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="active">
+                <td>CO2濃度</td>
+                <td>n%</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <br>
-        <div class="container-fluid bg-danger">
-          <div class="row">
-            <div class="h3 text-center">操作履歴</div>
-            <div class="container-fluid">
-              <div style="height:200px; width:500px; overflow-y:scroll;">
-                <table class="table table-bordered">
-                  <tbody></tbody>
-                </table>
-              </div>
-              <br>
-            </div>
-          </div>
+
+        <div class="row bg-danger right-row">
+          <h3 class="text-center">操作履歴</h3>
+          <table align="center" class="table table-bordered control-log">
+            <tbody>
+              <tr class="active">
+                <td>logMessage</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -111,6 +106,17 @@
 .switches {
   margin: 10px;
   text-align: center;
+}
+.control-log {
+  overflow-y:scroll;
+  width: 90%;
+}
+.right-row {
+  margin: 10px;
+  text-align: center;
+}
+.acquired-data {
+  width: 90%;
 }
 </style>
 
