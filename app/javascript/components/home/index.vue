@@ -2,81 +2,65 @@
   <div>
     <div class="container-fluid text-center">
       <h2>お家のIoT</h2>
-      <br>
     </div>
 
     <div class="container-fluid">
       <div class="container-fluid col-sm-6">
         <div class="container-fluid">
-          <div class="row text-center bg-success">
+          <div class="row bg-success switches">
             <h3>CO2濃度取得</h3>
             <button
               v-on:click="getCo2Density"
               class="btn btn-success"
             >取得
             </button>
-            <br>
           </div>
-          <br>
         </div>
 
         <div class="container-fluid">
-          <div class="row text-center bg-info">
+          <div class="row bg-info switches">
             <h3>天気予報アプリの起動</h3>
-            <div class="col-sm-3 col-sm-offset-2">
+            <div>
               <button
                 v-on:click="turnOnWeatherForecast"
                 class="btn btn-info"
               >天気予報on
               </button>
-            </div>
-            <div class="col-sm-3 col-sm-offset-2">
               <button
                 v-on:click="turnOffWeatherForecast"
                 class="btn btn-info"
               >天気予報off
               </button>
-              <br>
             </div>
-            <br>
           </div>
-          <br>
         </div>
 
-        <div class="ontainer-fluid bg-warning text-center">
-          <div class="row">
-            <h3>エアコンのリモコン</h3>
-            <div class="col-sm-1 col-sm-offset-3">
-              <button
-                v-on:click="turnOnCool"
-                class="btn btn-warning"
-              >冷房
-              </button>
-            </div>
-            <div class="col-sm-1 col-sm-offset-1">
-              <button
-                v-on:click="turnOnWarm"
-                class="btn btn-warning"
-              >暖房
-              </button>
-            </div>
-            <div class="col-sm-1 col-sm-offset-1">
-              <button
-                v-on:click="turnOnDry"
-                class="btn btn-warning"
-              >除湿
-              </button>
-            </div>
-            <br>
-          </div>
-          <br>
-          <div class="row"></div>
+        <div class="container-fluid">
+          <div class="row bg-warning switches">
+          <h3>エアコンのリモコン</h3>
+          <div>
             <button
-              v-on:click="turnOffAirControll"
-              class="btn btn-danger"
-            >エアコン停止
+              v-on:click="turnOnCool"
+              class="btn btn-warning"
+            >冷房
             </button>
-          <br>
+            <button
+              v-on:click="turnOnWarm"
+              class="btn btn-warning"
+            >暖房
+            </button>
+            <button
+              v-on:click="turnOnDry"
+              class="btn btn-warning"
+            >除湿
+            </button>
+          </div>
+          <button
+            v-on:click="turnOffAirControll"
+            class="btn btn-danger"
+          >エアコン停止
+          </button>
+          </div>
         </div>
       </div>
 
@@ -120,6 +104,14 @@
 </template>
 
 <style scoped>
+.btn {
+  margin: 10px;
+  padding: 7px 13pt;
+}
+.switches {
+  margin: 10px;
+  text-align: center;
+}
 </style>
 
 <script>
