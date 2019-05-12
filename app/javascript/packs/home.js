@@ -12,7 +12,7 @@
 // })
 
 import Vue from "vue";
-import Index from "../components/home/index";
+import Index from "../components/home/Index";
 
 document.addEventListener("DOMContentLoaded", () => {
   const el = "#homeIndex";
