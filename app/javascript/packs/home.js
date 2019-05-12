@@ -11,13 +11,13 @@
 //   })
 // })
 
-import Vue from 'vue'
-import Index from '../components/home/index'
+import Vue from "vue";
+import Index from "../components/home/index";
 
-document.addEventListener('DOMContentLoaded', () => {
-  const el = '#homeIndex'
+document.addEventListener("DOMContentLoaded", () => {
+  const el = "#homeIndex";
   const app = new Vue({
     el,
     render: h => h(Index)
-  })
-})
+  });
+});
