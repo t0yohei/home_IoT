@@ -2,7 +2,7 @@
   <div>
     <index-header></index-header>
     <div class="container-fluid">
-      <index-buttons-form></index-buttons-form>
+      <index-buttons-form @get-co2-density="getCo2Density"></index-buttons-form>
       <div class="container-fluid col-sm-6">
         <div class="row bg-danger right-row">
           <h3 class="text-center">取得データ</h3>
@@ -16,7 +16,7 @@
             <tbody>
               <tr class="active">
                 <td>CO2濃度</td>
-                <td>n%</td>
+                <td>{{ result.co2 }}</td>
               </tr>
             </tbody>
           </table>
@@ -26,8 +26,8 @@
           <h3 class="text-center">操作履歴</h3>
           <table align="center" class="table table-bordered control-log">
             <tbody>
-              <tr class="active">
-                <td>logMessage</td>
+              <tr class="active" v-for="result in resultHistroy" v-bind:key="result.time">
+                <td>{{ result.message }}</td>
               </tr>
             </tbody>
           </table>
@@ -51,23 +51,44 @@
 }
 </style>
 
-<script>
-import Header from "./index/Header";
-import ButtonsForm from "./index/ButtonsForm";
+<script lang="ts">
+import Vue from "vue";
+import axios from "axios";
+import Header from "./index/Header.vue";
+import ButtonsForm from "./index/ButtonsForm.vue";
 
-export default {
+// 二酸化炭素濃度Json取得のURL
+const GET_CO2_URL = "/api/v1/home/get_co2_density";
+
+export default Vue.extend({
   components: {
     "index-header": Header,
     "index-buttons-form": ButtonsForm
   },
 
-  data: function() {
+  data() {
     return {
-      co2: {
-        time: "",
-        density: ""
-      }
+      result: {
+        co2: "",
+        message: "",
+        time: ""
+      },
+      resultHistroy: []
     };
+  },
+
+  mounted() {
+    this.getCo2Density();
+  },
+
+  methods: {
+    getCo2Density(): void {
+      axios.get(GET_CO2_URL).then(response => {
+        this.result = response.data;
+        this.result.time = new Date();
+        this.resultHistroy.push(this.result);
+      });
+    }
   }
-};
+});
 </script>

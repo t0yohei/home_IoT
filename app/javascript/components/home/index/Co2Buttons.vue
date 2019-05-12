@@ -24,7 +24,7 @@ import Vue from "vue";
 export default Vue.extend({
   methods: {
     getCo2Density(): void {
-      console.log("co2");
+      this.$emit("get-co2-density");
     }
   }
 });

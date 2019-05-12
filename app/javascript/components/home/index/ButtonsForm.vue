@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid col-sm-6">
-    <co2-buttons></co2-buttons>
+    <co2-buttons @get-co2-density="getCo2Density"></co2-buttons>
     <weather-forecast-buttons></weather-forecast-buttons>
     <air-controll-buttons></air-controll-buttons>
   </div>
@@ -17,16 +17,22 @@
 }
 </style>
 
-<script>
-import Co2Buttons from "./Co2Buttons";
-import WeatherForecastButtons from "./WeatherForecastButtons";
-import AirControllButtons from "./AirControllButtons";
+<script lang="ts">
+import Vue from "vue";
+import Co2Buttons from "./Co2Buttons.vue";
+import WeatherForecastButtons from "./WeatherForecastButtons.vue";
+import AirControllButtons from "./AirControllButtons.vue";
 
-export default {
+export default Vue.extend({
   components: {
     "co2-buttons": Co2Buttons,
     "weather-forecast-buttons": WeatherForecastButtons,
     "air-controll-buttons": AirControllButtons
+  },
+  methods: {
+    getCo2Density(): void {
+      this.$emit("get-co2-density");
+    }
   }
-};
+});
 </script>

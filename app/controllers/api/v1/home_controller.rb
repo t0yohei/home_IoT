@@ -7,14 +7,17 @@ class Api::V1::HomeController < ApplicationController
     operation = 'on'
     switch_name = 'CO2取得スイッチ'
     begin
-      @co2 = Co2.get_co2
+      co2 = Co2.get_co2
     rescue StandardError => e
       # ちゃんとしないと行けないけれどとりあえず破棄する
       # error_message = "CO2濃度を取得できませんでした"
     end
 
-    message = create_message(switch_name, operation)
-    render json: message
+    result = {
+      co2: co2,
+      message: create_message(switch_name, operation)
+    }
+    render json: result
   end
 
   # def forecast_switch

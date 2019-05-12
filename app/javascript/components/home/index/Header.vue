@@ -6,4 +6,8 @@
 
 <style scoped></style>
 
-<script lang="ts"></script>
+<script lang="ts">
+import Vue from "vue";
+
+export default Vue.extend({});
+</script>
