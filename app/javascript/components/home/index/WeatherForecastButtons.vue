@@ -3,8 +3,13 @@
     <div class="row bg-info switches">
       <h3>天気予報アプリの起動</h3>
       <div>
-        <button v-on:click="turnOnWeatherForecast" class="btn btn-info">天気予報on</button>
-        <button v-on:click="turnOffWeatherForecast" class="btn btn-info">天気予報off</button>
+        <toggle-button
+          v-model="forecastActiveFlag"
+          @change="changeForecastActiveFlagCondition"
+          color="#82C7EB"
+          :sync="true"
+          :labels="{checked: 'On', unchecked: 'Off'}"
+        />
       </div>
     </div>
   </div>
@@ -23,14 +28,33 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { ToggleButton } from "vue-js-toggle-button";
+import axios from "axios";
+
+// 天気予報機能操作のURL
+const POST_OPERATE_FORECAST_SWITCH_URL = "/api/v1/home/operate_forecast_switch";
 
 export default Vue.extend({
+  components: {
+    "toggle-button": ToggleButton
+  },
+
+  data() {
+    return {
+      forecastActiveFlag: false
+    };
+  },
+
   methods: {
-    turnOnWeatherForecast(): void {
-      console.log("天気予報on");
-    },
-    turnOffWeatherForecast(): void {
-      console.log("天気予報off");
+    changeForecastActiveFlagCondition(): void {
+      axios
+        .post(POST_OPERATE_FORECAST_SWITCH_URL, {
+          forecast_active_flag: this.forecastActiveFlag
+        })
+        .then(response =>
+          this.$emit("change-forecast-active-flag-condition", response.data)
+        )
+        .catch(error => console.log(error));
     }
   }
 });

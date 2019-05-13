@@ -2,7 +2,10 @@
   <div>
     <index-header></index-header>
     <div class="container-fluid">
-      <index-buttons-form @get-co2-density="getCo2Density"></index-buttons-form>
+      <index-buttons-form
+        @get-co2-density="getCo2Density"
+        @change-forecast-active-flag-condition="changeForecastActiveFlagCondition"
+      ></index-buttons-form>
       <div class="container-fluid col-sm-6">
         <div class="row bg-danger right-row">
           <h3 class="text-center">取得データ</h3>
@@ -16,7 +19,7 @@
             <tbody>
               <tr class="active">
                 <td>CO2濃度</td>
-                <td>{{ result.co2 }}</td>
+                <td>{{ co2Result.co2 }}</td>
               </tr>
             </tbody>
           </table>
@@ -68,8 +71,13 @@ export default Vue.extend({
 
   data() {
     return {
-      result: {
+      co2Result: {
         co2: "",
+        message: "",
+        time: ""
+      },
+      forecastResult: {
+        succeded: "",
         message: "",
         time: ""
       },
@@ -84,10 +92,17 @@ export default Vue.extend({
   methods: {
     getCo2Density(): void {
       axios.get(GET_CO2_URL).then(response => {
-        this.result = response.data;
-        this.result.time = new Date();
-        this.resultHistroy.push(this.result);
+        this.co2Result = response.data;
+        let now = new Date();
+        this.co2Result.time = now.toLocaleTimeString();
+        this.resultHistroy.push(this.co2Result);
       });
+    },
+    changeForecastActiveFlagCondition(responseData: object): void {
+      this.forecastResult = responseData;
+      let now = new Date();
+      this.forecastResult.time = now.toLocaleTimeString();
+      this.resultHistroy.push(this.forecastResult);
     }
   }
 });
