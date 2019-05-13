@@ -23,9 +23,10 @@ class Api::V1::HomeController < ApplicationController
   end
 
   def operate_forecast_switch
-    forecast_switch_active_flag = params[:forecast_switch_active_flag]
+    forecast_active_flag = params[:forecast_active_flag].to_s
+
     operation_target = '天気予報機能'
-    rake_command = 'rake forecast_switch:' + forecast_switch_active_flag
+    rake_command = 'rake forecast_switch:' + forecast_active_flag
     begin
       system(rake_command)
       succeded = true
@@ -36,7 +37,7 @@ class Api::V1::HomeController < ApplicationController
     end
     result = {
       succeded: succeded,
-      message: create_message(operation_target, forecast_switch_active_flag)
+      message: create_message(operation_target, forecast_active_flag)
     }
     render json: result
   end
