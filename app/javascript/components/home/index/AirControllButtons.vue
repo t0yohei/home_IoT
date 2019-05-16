@@ -3,11 +3,14 @@
     <div class="row bg-warning switches">
       <h3>エアコンのリモコン</h3>
       <div>
-        <button v-on:click="turnOnCool" class="btn btn-warning">冷房</button>
-        <button v-on:click="turnOnWarm" class="btn btn-warning">暖房</button>
-        <button v-on:click="turnOnDry" class="btn btn-warning">除湿</button>
+        <button
+          v-for="startOption in startOptions"
+          :key="startOption.id"
+          @click="startControl(startOption.command)"
+          class="btn btn-warning"
+        >{{ startOption.name }}</button>
       </div>
-      <button v-on:click="turnOffAirControll" class="btn btn-danger">エアコン停止</button>
+      <button @click="stopControll(stopOption.command)" class="btn btn-danger">{{ stopOption.name }}</button>
     </div>
   </div>
 </template>
@@ -27,18 +30,38 @@
 import Vue from "vue";
 
 export default Vue.extend({
+  data() {
+    return {
+      startOptions: [
+        {
+          id: 1,
+          name: "冷房",
+          command: "cool_on"
+        },
+        {
+          id: 2,
+          name: "暖房",
+          command: "hot_on"
+        },
+        {
+          id: 3,
+          name: "除湿",
+          command: "dry_on"
+        }
+      ],
+      stopOption: {
+        name: "エアコン停止",
+        command: "air_off"
+      }
+    };
+  },
+
   methods: {
-    turnOnCool(): void {
-      console.log("冷房on");
+    startControl(command: string): void {
+      console.log(command);
     },
-    turnOnWarm(): void {
-      console.log("暖房on");
-    },
-    turnOnDry(): void {
-      console.log("除湿on");
-    },
-    turnOffAirControll(): void {
-      console.log("エアコン停止");
+    stopControll(command: string): void {
+      console.log(command);
     }
   }
 });
