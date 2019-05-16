@@ -42,14 +42,24 @@ class Api::V1::HomeController < ApplicationController
     render json: result
   end
 
-  # def air_controll
-  #   operation = params[:air_controll]
-  #   switch_name = 'エアコンスイッチ'
-  #   rake_command = 'rake air_controll:' + operation
-  #   system(rake_command)
-  #   create_message(switch_name, operation)
-  #   render action: :index
-  # end
+  def operate_air_controll
+    operation_value = params[:air_controll_operation_value]
+    operation_target = 'エアコン機能'
+    rake_command = 'rake air_controll:' + operation_value
+    begin
+      system(rake_command)
+      succeded = true
+    rescue StandardError => e
+      # ちゃんとしないと行けないけれどとりあえず破棄する
+      # error_message = "天気予報機能を操作できませんでした"
+      succeded = false
+    end
+    result = {
+      succeded: succeded,
+      message: create_message(operation_target, operation_value)
+    }
+    render json: result
+  end
 
   private
 
