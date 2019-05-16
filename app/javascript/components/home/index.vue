@@ -91,10 +91,6 @@ export default Vue.extend({
     };
   },
 
-  mounted() {
-    this.getCo2Density();
-  },
-
   methods: {
     getCo2Density(): void {
       axios.get(GET_CO2_URL).then(response => {
