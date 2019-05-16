@@ -6,11 +6,14 @@
         <button
           v-for="startOption in startOptions"
           :key="startOption.id"
-          @click="startControl(startOption.command)"
+          @click="operateControl(startOption.command)"
           class="btn btn-warning"
         >{{ startOption.name }}</button>
       </div>
-      <button @click="stopControll(stopOption.command)" class="btn btn-danger">{{ stopOption.name }}</button>
+      <button
+        @click="operateControl(stopOption.command)"
+        class="btn btn-danger"
+      >{{ stopOption.name }}</button>
     </div>
   </div>
 </template>
@@ -28,6 +31,10 @@
 
 <script lang="ts">
 import Vue from "vue";
+import axios from "axios";
+
+// エアコン操作機能操作のURL
+const POST_OPERATE_AIR_CONTROL_URL = "/api/v1/home/operate_air_controll";
 
 export default Vue.extend({
   data() {
@@ -57,11 +64,13 @@ export default Vue.extend({
   },
 
   methods: {
-    startControl(command: string): void {
-      console.log(command);
-    },
-    stopControll(command: string): void {
-      console.log(command);
+    operateControl(command: string): void {
+      axios
+        .post(POST_OPERATE_AIR_CONTROL_URL, {
+          air_controll_operation_command: command
+        })
+        .then(response => this.$emit("air-control-operated", response.data))
+        .catch(error => console.log(error));
     }
   }
 });

@@ -5,6 +5,7 @@
       <index-buttons-form
         @get-co2-density="getCo2Density"
         @change-forecast-active-flag-condition="changeForecastActiveFlagCondition"
+        @air-control-operated="airControlOperated"
       ></index-buttons-form>
       <div class="container-fluid col-sm-6">
         <div class="row bg-danger right-row">
@@ -81,6 +82,11 @@ export default Vue.extend({
         message: "",
         time: ""
       },
+      airControlResult: {
+        succeded: "",
+        message: "",
+        time: ""
+      },
       resultHistroy: []
     };
   },
@@ -95,14 +101,20 @@ export default Vue.extend({
         this.co2Result = response.data;
         let now = new Date();
         this.co2Result.time = now.toLocaleTimeString();
-        this.resultHistroy.push(this.co2Result);
+        this.resultHistroy.unshift(this.co2Result);
       });
     },
     changeForecastActiveFlagCondition(responseData: object): void {
       this.forecastResult = responseData;
       let now = new Date();
       this.forecastResult.time = now.toLocaleTimeString();
-      this.resultHistroy.push(this.forecastResult);
+      this.resultHistroy.unshift(this.forecastResult);
+    },
+    airControlOperated(responseData: object): void {
+      this.airControlResult = responseData;
+      let now = new Date();
+      this.forecastResult.time = now.toLocaleTimeString();
+      this.resultHistroy.unshift(this.airControlResult);
     }
   }
 });

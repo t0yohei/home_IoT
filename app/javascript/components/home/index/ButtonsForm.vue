@@ -1,10 +1,10 @@
 <template>
   <div class="container-fluid col-sm-6">
-    <co2-buttons @get-co2-density="getCo2Density"></co2-buttons>
+    <co2-buttons @get-co2-density="getCo2Density"/>
     <weather-forecast-buttons
       @change-forecast-active-flag-condition="changeForecastActiveFlagCondition"
-    ></weather-forecast-buttons>
-    <air-controll-buttons></air-controll-buttons>
+    />
+    <air-controll-buttons @air-control-operated="airControlOperated"/>
   </div>
 </template>
 
@@ -37,6 +37,9 @@ export default Vue.extend({
     },
     changeForecastActiveFlagCondition(responseData: object): void {
       this.$emit("change-forecast-active-flag-condition", responseData);
+    },
+    airControlOperated(responseData: object): void {
+      this.$emit("air-control-operated", responseData);
     }
   }
 });

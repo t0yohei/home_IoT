@@ -43,9 +43,9 @@ class Api::V1::HomeController < ApplicationController
   end
 
   def operate_air_controll
-    operation_value = params[:air_controll_operation_value]
+    operation_command = params[:air_controll_operation_command]
     operation_target = 'エアコン機能'
-    rake_command = 'rake air_controll:' + operation_value
+    rake_command = 'rake air_controll:' + operation_command
     begin
       system(rake_command)
       succeded = true
@@ -56,7 +56,7 @@ class Api::V1::HomeController < ApplicationController
     end
     result = {
       succeded: succeded,
-      message: create_message(operation_target, operation_value)
+      message: create_message(operation_target, operation_command)
     }
     render json: result
   end
