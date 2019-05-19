@@ -6,33 +6,25 @@
   <head>
     <title>HomeIot</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
     <header>
       <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
             <% if user_signed_in? %>
-            <strong><%= link_to current_user.email, home_show_path %></strong>
-            <%= link_to 'プロフィール変更', edit_user_registration_path %>
-            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-          <% else %>
-            <%= link_to 'ログイン', new_user_session_path %>
+              <strong><%= link_to current_user.email, home_show_path %></strong>
+              <%= link_to 'プロフィール変更', edit_user_registration_path %>
+              <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+            <% else %>
+              <%= link_to 'ログイン', new_user_session_path %>
             <% end %>
           </div>
         </div>
       </nav>
     </header>
-    <div class="container">
-
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-
-      <%= yield %>
-    </div>
+    <div id="application"></div>
   </body>
 </html>
