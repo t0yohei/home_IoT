@@ -1,6 +1,6 @@
 <template>
   <div>
-    <index-header></index-header>
+    <index-header :title="title"></index-header>
     <div class="container-fluid">
       <index-buttons-form
         @get-co2-density="getCo2Density"
@@ -58,7 +58,7 @@
 <script lang="ts">
 import Vue from "vue";
 import axios from "axios";
-import Header from "./index/Header.vue";
+import Header from "components/Header.vue";
 import ButtonsForm from "./index/ButtonsForm.vue";
 
 // 二酸化炭素濃度Json取得のURL
@@ -72,6 +72,7 @@ export default Vue.extend({
 
   data() {
     return {
+      title: "お家のIoT",
       co2Result: {
         co2: "",
         message: "",
