@@ -8,31 +8,14 @@
         @air-control-operated="airControlOperated"
       ></index-buttons-form>
       <div class="container-fluid col-sm-6">
-        <index-fetched-data :co2Result="co2Result" />
-        <div class="row bg-danger right-row">
-          <h3 class="text-center">操作履歴</h3>
-          <table align="center" class="table table-bordered control-log">
-            <tbody>
-              <tr class="active" v-for="result in resultHistroy" v-bind:key="result.time">
-                <td>{{ result.message }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <index-fetched-data :co2-result="co2Result" />
+        <index-operated-history :result-histroy="resultHistroy" />
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.control-log {
-  overflow-y: scroll;
-  width: 90%;
-}
-.right-row {
-  margin: 10px;
-  text-align: center;
-}
 </style>
 
 <script lang="ts">
@@ -41,6 +24,7 @@ import axios from "axios";
 import Header from "components/Header.vue";
 import ButtonsForm from "./index/ButtonsForm.vue";
 import FetchedData from "./index/FetchedData.vue";
+import OperatedHistory from "./index/OperatedHistory.vue";
 
 // 二酸化炭素濃度Json取得のURL
 const GET_CO2_URL = "/api/v1/home/get_co2_density";
@@ -49,7 +33,8 @@ export default Vue.extend({
   components: {
     "index-header": Header,
     "index-buttons-form": ButtonsForm,
-    "index-fetched-data": FetchedData
+    "index-fetched-data": FetchedData,
+    "index-operated-history": OperatedHistory
   },
 
   data() {
