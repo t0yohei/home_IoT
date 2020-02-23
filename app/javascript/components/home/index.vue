@@ -25,6 +25,7 @@ import Header from "components/Header.vue";
 import ButtonsForm from "./index/ButtonsForm.vue";
 import FetchedData from "./index/FetchedData.vue";
 import OperatedHistory from "./index/OperatedHistory.vue";
+import Co2Result from "libs/Co2Result.ts"
 
 // 二酸化炭素濃度Json取得のURL
 const GET_CO2_URL = "/api/v1/home/get_co2_density";
@@ -40,11 +41,7 @@ export default Vue.extend({
   data() {
     return {
       title: "お家のIoT",
-      co2Result: {
-        co2: "",
-        message: "",
-        time: ""
-      },
+      co2Result: Co2Result.buildDefault(),
       forecastResult: {
         succeded: "",
         message: "",
@@ -62,9 +59,7 @@ export default Vue.extend({
   methods: {
     getCo2Density(): void {
       axios.get(GET_CO2_URL).then(response => {
-        this.co2Result = response.data;
-        let now = new Date();
-        this.co2Result.time = now.toLocaleTimeString();
+        this.co2Result = Co2Result.build(response.data);
         this.resultHistroy.unshift(this.co2Result);
       });
     },
