@@ -41,7 +41,10 @@ export default Vue.extend({
   data() {
     return {
       title: "お家のIoT",
-      co2Result: Co2Result.buildDefault(),
+      co2Result: new Co2Result({
+        co2: '',
+        message: ''
+      }),
       forecastResult: {
         succeded: "",
         message: "",
